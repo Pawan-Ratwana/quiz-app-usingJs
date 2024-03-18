@@ -1,7 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Galdeano&family=Gotu&family=Hi+Melody&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  height: 100vh;
 }
 
 .container {
@@ -19,7 +24,7 @@
   align-items: center;
   width: 90%;
   background-color: #fff;
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
   padding: 5px 10px;
 }
 
@@ -46,6 +51,11 @@
   padding: 5px 0;
 }
 
+.heading span {
+  color: #f89603;
+  font-size: 28px;
+}
+
 .question-sec {
   width: 100%;
   display: flex;
@@ -59,6 +69,7 @@
 .question-sec #question {
   color: #363535;
   font-size: 20px;
+  font-family: "Gotu", sans-serif;
   font-weight: 600;
   line-height: 22px;
   letter-spacing: 1px;
@@ -97,6 +108,37 @@
 .btn:focus,
 .btn:hover {
   border: 2px solid #494848;
+}
+
+.show-answer-container {
+  width: 90%;
+  background-color: #fff;
+  border-top: 1px solid #6e6c6c;
+  border-radius: 0 0 12px 12px;
+  padding: 5px 10px;
+}
+
+.show-answer-heading-div {
+  width: 100%;
+  padding: 5px;
+  margin-top: -6px;
+  /* background-color: darkturquoise; */
+}
+
+#show-answer-header {
+  color: #212121;
+  font-size: 18px;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+#show-answer {
+  color: #212121;
+  padding-top: 5px;
+  padding-left: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: green;
 }
 
 .next-button {
@@ -219,6 +261,7 @@
     font-size: 0.9rem;
     line-height: 18px;
     letter-spacing: 0.8px;
+    margin: 9px 0;
   }
   .nextBtn {
     width: 100%;

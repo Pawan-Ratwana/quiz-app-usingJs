@@ -30,23 +30,38 @@ const quesJSON = [
 let score = 0;
 let currentQuestion = 0;
 let totalQuestion = quesJSON.length;
+let showAnswerClick = 0;
 
 const questionEl = document.getElementById('question');
 const optionEl = document.getElementById('options');
-const scoreEl = document.getElementById('score');
 const nextBtn = document.getElementById('nextBtn');
 const questionNo = document.getElementById('questionNo');
 const scoreDis = document.getElementById('scoreDis')
-console.log(nextBtn)
+const showAnswerBtn = document.getElementById('show-answer-header');
+const showAnswerContent = document.getElementById('show-answer')
+console.log(showAnswerContent)
 
 showQuestion();
 
 // Event handling for next button 
 
 nextBtn.addEventListener('click', () => {
-    scoreEl.textContent = `Score: ${score}/${totalQuestion}`;
+    scoreDis.textContent = `Score: ${score}/${totalQuestion}`;
     nextQuestion();
 });
+
+function showAnswer() {
+    showAnswerContent.style.display = "none";
+
+    showAnswerBtn.addEventListener('click', () => {
+        if (showAnswerContent.style.display === "none") {
+            showAnswerClick++;
+            showAnswerContent.style.display = "block";
+        } else {
+            showAnswerContent.style.display = "none";
+        }
+    })
+}
 
 function showQuestion() {
     // Destructuring the object 
@@ -56,6 +71,9 @@ function showQuestion() {
 
     // setting question text content 
     questionEl.textContent = question;
+
+    // Show answer 
+    showAnswerContent.textContent = `Answer : "${correctAnswer}"`;
 
     let shuffledOptions = shuffledOption(options);
 
@@ -71,8 +89,11 @@ function showQuestion() {
         // event handling on the button 
         btn.addEventListener('click', () => {
 
-            if (option === correctAnswer) {
+            if (showAnswerClick > 0) {
+                score = score;
+            } else if (option === correctAnswer) {
                 score = score + 1;
+
             } else {
                 score = score - 0.25;
             }
@@ -83,6 +104,13 @@ function showQuestion() {
     });
 }
 
+
+
+
+
+showAnswer()
+
+
 //  function for nextQuestion
 function nextQuestion() {
     currentQuestion++;
@@ -92,7 +120,12 @@ function nextQuestion() {
         // optionEl.textContent = ''
         optionEl.textContent = `Score: ${score}/${totalQuestion}`;
         nextBtn.remove()
+        document.getElementById('showAnswer').style.border = "none"
+        showAnswerContent.textContent = "";
+        showAnswerBtn.remove()
     } else {
+        showAnswerContent.style.display = "none";
+        showAnswerClick = 0
         showQuestion()
     }
 }
