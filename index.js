@@ -1,44 +1,76 @@
-const questionObj = {
-    category: 'Food & Drink',
-    id: 'qa-1',
-    correctAnswer: 'Three',
-    options: ['Two', 'Three', 'Four', 'Five'],
-    question: "How many pieces of bun are in a Mcdonald's Big Mac?"
-};
+const quesJSON = [
+    {
+        correctAnswer: 'Three ',
+        options: ['Two', 'Three ', 'Four', 'Five'],
+        question: "How many pieces of bun are in a Mcdonald's Big Mac?",
+    },
+    {
+        correctAnswer: 'L. Frank Baum',
+        options: ['Suzanne Collins', 'James Fenimore Cooper', 'L. Frank Baum', 'Donna Leon',],
+        question: "Which author wrote 'The Wonderful Wizard of Oz'?",
+    },
+    {
+        correctAnswer: 'Atlanta United',
+        options: ['Atlanta United', 'Atlanta Impact', 'Atlanta Bulls', 'Atlanta Stars',],
+        question: 'Which of these is a soccer team based in Atlanta?',
+    },
+    {
+        correctAnswer: 'A Nanny',
+        options: ['A Sow', 'A Lioness', 'A Hen', 'A Nanny',],
+        question: 'A female goat is known as what?',
+    },
+    {
+        correctAnswer: 'P. L. Travers',
+        options: ['J. R. R. Tolkien', 'P. L. Travers', 'Lewis Carroll', 'Enid Blyton',],
+        question: "Which author wrote 'Mary Poppins'?",
+    },
+];
 
-const { correctAnswer, options, question } = questionObj;
+
+const { correctAnswer, options, question } = quesJSON;
 const questionEl = document.getElementById('question');
 const optionEl = document.getElementById('options');
 const scoreEl = document.getElementById('score');
 const nextBtn = document.getElementById('nextBtn');
 let score = 0;
+let currentQuestion = 0;
 // Manipulate the DOM 
 
-// setting question text content 
-questionEl.textContent = question;
+function showQuestion() {
+    // Destructuring the object 
+    const { correctAnswer, options, question } = quesJSON[currentQuestion];
 
-// Populating the Options div with the buttons 
+    // setting question text content 
+    questionEl.textContent = question;
 
-let shuffledOptions = shuffledOption(options);
+    let shuffledOptions = shuffledOption(options);
 
-shuffledOptions.forEach(option => {
-    const btn = document.createElement('button');
-    btn.className = "btn";
-    optionEl.appendChild(btn);
-    btn.textContent = option;
-    btn.addEventListener('click', () => {
+    // Populating the Options div with the buttons 
 
-        if (option === correctAnswer) {
-            score = score + 1;
-        } else {
-            score = score - 0.25;
-        }
-        questionEl.textContent = "Quiz Completed!!"
-        optionEl.textContent = `Score: ${score}/5`
-        scoreEl.textContent = `<h2>Score: ${score}/5</h2>`;
-        nextBtn.remove()
+    shuffledOptions.forEach(option => {
+        // create button 
+        const btn = document.createElement('button');
+        btn.className = "btn"
+        optionEl.appendChild(btn);
+        btn.textContent = option;
+
+        // event handling on the button 
+        btn.addEventListener('click', () => {
+
+            if (option === correctAnswer) {
+                score = score + 1;
+            } else {
+                score = score - 0.25;
+            }
+            questionEl.textContent = "Quiz Completed!!"
+            optionEl.textContent = ''
+            scoreEl.textContent = `Score: ${score}`;
+            nextBtn.remove()
+        })
     });
-})
+}
+
+showQuestion()
 
 // Shuffled Option
 
