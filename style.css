@@ -77,7 +77,7 @@
 
 .btn:hover,
 .nextBtn:hover {
-  background-color: 212121;
+  background-color: #212121;
   color: white;
 }
 
@@ -90,8 +90,9 @@
   border: 2px solid white;
   outline: none;
   border-radius: 8px;
+  font-weight: 500;
   background-color: lightblue;
-  color: white;
+  color: #1f1e1e;
 }
 .btn:focus,
 .btn:hover {
