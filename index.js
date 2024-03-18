@@ -39,7 +39,14 @@ const questionNo = document.getElementById('questionNo');
 const scoreDis = document.getElementById('scoreDis')
 console.log(nextBtn)
 
-// Manipulate the DOM 
+showQuestion();
+
+// Event handling for next button 
+
+nextBtn.addEventListener('click', () => {
+    scoreEl.textContent = `Score: ${score}/${totalQuestion}`;
+    nextQuestion();
+});
 
 function showQuestion() {
     // Destructuring the object 
@@ -82,6 +89,7 @@ function nextQuestion() {
     optionEl.textContent = ''
     if (currentQuestion >= quesJSON.length) {
         questionEl.textContent = "Quiz Completed!!"
+        // optionEl.textContent = ''
         optionEl.textContent = `Score: ${score}/${totalQuestion}`;
         nextBtn.remove()
     } else {
@@ -89,7 +97,6 @@ function nextQuestion() {
     }
 }
 
-showQuestion()
 
 // Shuffled Option
 
