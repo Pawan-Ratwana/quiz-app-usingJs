@@ -39,7 +39,14 @@ const questionNo = document.getElementById('questionNo');
 const scoreDis = document.getElementById('scoreDis')
 const showAnswerBtn = document.getElementById('show-answer-header');
 const showAnswerContent = document.getElementById('show-answer')
-console.log(showAnswerContent)
+const tryAgainContainer = document.querySelector(".try-again-div");
+const tryAgain = document.getElementById('tryAgain');
+
+
+// hide the display 
+tryAgainContainer.style.display = "none";
+
+
 
 showQuestion();
 
@@ -115,11 +122,26 @@ showAnswer()
 function nextQuestion() {
     currentQuestion++;
     optionEl.textContent = ''
+
     if (currentQuestion >= quesJSON.length) {
+
+        // remove question number and score form header 
+        questionNo.textContent = '';
+        scoreDis.textContent = '';
+
+        // display quiz completion 
         questionEl.textContent = "Quiz Completed!!"
-        // optionEl.textContent = ''
-        optionEl.textContent = `Score: ${score}/${totalQuestion}`;
+
+        // display the total score 
+        displayTotalScore();
+
+        // try again button
+        showTryAgain();
+
+        // remove next button 
         nextBtn.remove()
+
+        // remove showAnswer
         document.getElementById('showAnswer').style.border = "none"
         showAnswerContent.textContent = "";
         showAnswerBtn.remove()
@@ -130,6 +152,22 @@ function nextQuestion() {
     }
 }
 
+function displayTotalScore() {
+    let scorePer = (totalQuestion * 40) / 100;
+    if (score >= scorePer) {
+        optionEl.innerHTML = `<div style='color:green; font-size:22px; font-weight:500; text-align: center; margin-bottom: 15px;'><p>Well Done!</p><p >Your Score is: ${score} / ${totalQuestion}</p></div>`;
+    } else {
+        optionEl.innerHTML = `<div style='color:red; font-size:22px; font-weight:500; text-align: center; padding-top: 10px;'><p>Oops!</p><p >Your Score is: ${score} / ${totalQuestion}</p></div>`;
+    }
+}
+
+
+function showTryAgain() {
+    tryAgainContainer.style.display = "flex"
+    tryAgain.addEventListener('click', () => {
+        location.reload();
+    })
+}
 
 // Shuffled Option
 
